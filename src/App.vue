@@ -1,9 +1,9 @@
-<script setup></script>
+<script setup>
+import Navbar from './components/Navbar.vue'
+</script>
 
 <template>
-  <div class="logo">
-    <h1>GAAAA</h1>
-  </div>
+  <Navbar />
   <router-view />
 </template>
 
