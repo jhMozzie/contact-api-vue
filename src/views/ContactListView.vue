@@ -1,20 +1,25 @@
 <script setup>
 import { useContactStore } from "../stores/contactStore";
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import ContactForm from '../components/ContactForm.vue';
 
 const contactStore = useContactStore();
 const contacts = computed(() => contactStore.contacts);
 const selectedContact = ref(null)
 
-const saveContact = (contact) => {
+// Al cargar la vista, trae los contactos reales de la API
+onMounted(() => {
+    contactStore.fetchContacts()
+})
+
+const saveContact = async (contact) => {
   if (contact.id) {
     // El contacto ya existe → estamos editando
-    contactStore.updateContact(contact)
+    await contactStore.updateContact(contact)
   } else {
     // Es un contacto nuevo → estamos creando
     const newId = Date.now()
-    contactStore.addContact({ ...contact, id: newId })
+    await contactStore.addContact({ ...contact, id: newId })
   }
   selectedContact.value = null
 }
@@ -23,8 +28,8 @@ const editContact = (contact) => {
     selectedContact.value = { ...contact }
 }
 
-const deleteContact = (id) => {
-    contactStore.removeContact(id)
+const deleteContact = async (id) => {
+    await contactStore.removeContact(id)
 }
 
 
