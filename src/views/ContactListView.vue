@@ -53,7 +53,7 @@ const deleteContact = async (id) => {
 
       <!-- Lista de contactos (70%) -->
       <div class="md:flex-[0_0_70%] mt-4 md:mt-0">
-        <table class="min-w-full border border-gray-300 text-left text-sm text-gray-700">
+        <table class="min-w-xl border border-gray-300 text-left text-sm text-gray-700">
           <thead class="bg-gray-100">
             <tr>
               <th class="p-2 font-semibold">Nombres</th>
@@ -70,9 +70,11 @@ const deleteContact = async (id) => {
               <td class="py-1 px-2">{{ contact.phone }}</td>
               <td class="py-1 px-2">{{ contact.email }}</td>
               <td class="py-1 space-x-2 px-2">
-                <button @click="editContact(contact)" class="text-blue-500">Editar</button>
+                <button @click="editContact(contact)" class="text-blue-500">
+                  <font-awesome-icon :icon="['fas', 'pen']" />
+                </button>
                 <button @click="deleteContact(contact.id)" class="text-red-500">
-                  Eliminar
+                  <font-awesome-icon :icon="['fas', 'trash']" />
                 </button>
               </td>
             </tr>
